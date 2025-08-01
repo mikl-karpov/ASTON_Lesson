@@ -1,0 +1,12 @@
+public class ProductApp {
+    public static void main(String[] args) {
+        Product[] productsArray = new Product[5];
+        productsArray[0] = new Product("Samsung S25 Ultra", "01.02.2025", "Samsung Corp.", "Korea", 5599, true);
+        productsArray[1] = new Product("Poco 5S", "01.06.2023", "Xiaomi", "China", 3599, true);
+        productsArray[2] = new Product("OnePlus 13", "31.01.2020", "OnePlus", "China", 79599, false);
+        productsArray[3] = new Product("HUAWEI Mate XT", "05.05.2022", " Huawei", "China", 269599, false);
+        productsArray[4] = new Product("Apple iPhone 16 Pro Max", "20.06.2025", "Apple", "USA", 181599, true);
+
+        System.out.println(productsArray[0].country);
+    }
+}

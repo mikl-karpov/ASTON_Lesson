@@ -1,0 +1,23 @@
+public class Product {
+    String name;
+    String date;
+    String manufacturer;
+    String country;
+    int price;
+    boolean condition;
+
+    public Product(String name, String date, String manufacturer, String country, int price, boolean condition){
+        this.name = name;
+        this.date = date;
+        this.manufacturer = manufacturer;
+        this.country = country;
+        this.price = price;
+        this.condition = condition;
+    }
+
+    public static class Park{
+        private String name;
+        private String time;
+        private int price;
+    }
+}

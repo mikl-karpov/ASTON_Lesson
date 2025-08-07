@@ -1,0 +1,71 @@
+public class Main {
+    private static String[][] array1 = {{"1", "2", "3", "4"}, {"5", "6", "7", "8"}, {"9", "10", "11", "12"}, {"13", "14", "15", "16"}};
+    
+    private static String[][] array2 = {{"1", "2", "3", "4", "5"}, {"6", "7", "8", "9", "10"}, {"11", "12", "13", "14", "15"}, {"16", "17", "18", "19", "20"}};
+    
+    private static String[][] array3 = {{"1", "2", "3", "4"}, {"5", "6", "7", "8"}, {"9", "Десять", "11", "12"}, {"13", "14", "15", "16"}};
+    
+
+    public static void main(String[] args) {
+        System.out.println("\n обрабатываем массив array1...");
+        try {
+            System.out.println("Сумма всех элементов массива array1 = "+ MyMethodEx(array1));
+        } catch (MyArrayDataException e){
+            System.out.println(e);
+            System.out.println("Достоверный результат расчета суммы получен быть не может!");
+        } catch (MyArraySizeException e){
+            System.out.println(e);
+            System.out.println("Достоверный результат расчета суммы получен быть не может!");
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println(e);
+            System.out.println("Обращение к несуществующему индексу массива");
+        }
+        System.out.println("\n обрабатываем массив array2...");
+        try {
+            System.out.println("Сумма всех элементов массива array2 = "+ MyMethodEx(array2));
+        } catch (MyArrayDataException e){
+            System.out.println(e);
+            System.out.println("Достоверный результат расчета суммы получен быть не может!");
+        } catch (MyArraySizeException e){
+            System.out.println(e);
+            System.out.println("Достоверный результат расчета суммы получен быть не может!");
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println(e);
+            System.out.println("Обращение к несуществующему индексу массива");
+        }
+        System.out.println("\n обрабатываем массив array3...");
+        try {
+            System.out.println("Сумма всех элементов массива array3 = "+ MyMethodEx(array3));
+        } catch (MyArrayDataException e){
+            System.out.println(e);
+            System.out.println("Достоверный результат расчета суммы получен быть не может!");
+        } catch (MyArraySizeException e){
+            System.out.println(e);
+            System.out.println("Достоверный результат расчета суммы получен быть не может!");
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println(e);
+            System.out.println("Вывод несуществующего элемента");
+        }
+    }
+
+    public static int MyMethodEx (String[][] str) throws RuntimeException{
+        int sum = 0;
+        if(str.length!=4 || str[0].length!=4) throw new MyArraySizeException("Массив не соответствует размерности 4х4!");
+        for(int y = 0; y < str.length; y++){
+            for (int x = 0; x<str[y].length; x++){
+                try {
+                    sum += Integer.parseInt(str[y][x]);
+                } catch (NumberFormatException e){
+                    throw new MyArrayDataException("В переданном массиве элемент с Array["+y+"]["+x+"] НЕ может быть конвертирован в число!!!");
+                }
+                try {
+                    //System.out.println(str[0][7]); (раскоментировать для исключения)
+                } catch (IndexOutOfBounds e){
+                    throw new ArrayIndexOutOfBoundsException("Обращение к несуществующему индексу массива");
+                }
+            }
+        }
+        return sum;
+
+    }
+}

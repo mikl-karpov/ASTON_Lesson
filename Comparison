@@ -1,0 +1,5 @@
+public class Comparison {
+    public static boolean getComparison(int x, int y) {
+        return x == y;
+    }
+}

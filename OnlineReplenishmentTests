@@ -1,0 +1,97 @@
+package tests;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.OnlineReplenishmentPage;
+import pages.ConfirmationModal;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+public class OnlineReplenishmentTests extends BaseTest {
+
+   @Test(priority=1)
+   public void testBlockTitle() {
+       OnlineReplenishmentPage page = new OnlineReplenishmentPage(driver);
+       String title = page.getBlockTitle();
+       Assert.assertEquals(title, "Онлайн пополнение без комиссии", "Название блока не совпадает");
+   }
+
+   @Test(priority=2)
+   public void testPaymentLogosPresence() {
+       OnlineReplenishmentPage page= new OnlineReplenishmentPage(driver);
+       Assert.assertTrue(page.getPaymentLogos().size() > 0, "Логотипы платёжных систем отсутствуют");
+   }
+
+   @Test(priority=3)
+   public void testMoreInfoLinkOpensNewTab() throws InterruptedException{
+       OnlineReplenishmentPage page= new OnlineReplenishmentPage(driver);
+       String originalHandle=driver.getWindowHandle();
+
+       page.clickMoreInfo();
+
+       // Ждем появления новой вкладки
+       Thread.sleep(2000); // лучше заменить на явное ожидание
+
+       for(String handle:driver.getWindowHandles()){
+           if(!handle.equals(originalHandle)){
+               driver.switchTo().window(handle);
+               break;
+           }
+       }
+       Assert.assertTrue(driver.getTitle().contains("Подробнее") || driver.getCurrentUrl().contains("service"),
+               "Страница по ссылке 'Подробнее о сервисе' не открылась");
+
+       // Возвращаемся назад или закрываем вкладку по необходимости
+       driver.close();
+       driver.switchTo().window(originalHandle);
+   }
+
+   @Test(priority=4)
+   public void testUnfilledFieldsLabelsForService() throws InterruptedException{
+       OnlineReplenishmentPage page= new OnlineReplenishmentPage(driver);
+
+       List<String> labels= page.getUnfilledFieldsLabels("Услуги связи");
+       List<String> expectedLabels= Arrays.asList("Номер телефона", "Сумма");
+       
+       Assert.assertTrue(labels.containsAll(expectedLabels), "Некорректные незаполненные поля: "+labels);
+   }
+
+   @Test(priority=5)
+   public void testFillFormAndVerifyConfirmation() throws InterruptedException{
+       OnlineReplenishmentPage page= new OnlineReplenishmentPage(driver);
+
+       Map<String,String> data=new java.util.HashMap<>();
+       data.put("phone", "297777777");
+       data.put("amount", "10");
+
+       WebElement continueBtn= page.fillOption("Услуги связи", data);
+       
+       continueBtn.click();
+
+       // Ждем появления окна подтверждения
+       Thread.sleep(3000); // лучше заменить на явное ожидание
+
+       ConfirmationModal modal=new ConfirmationModal(driver);
+       
+       Assert.assertTrue(modal.isDisplayed(), "Модальное окно подтверждения не отображается");
+
+       String amountStr= modal.getAmount(); // например, "Сумма: 10 руб."
+       Assert.assertTrue(amountStr.contains("10"), "Некорректная сумма: "+amountStr);
+
+       String phoneStr= modal.getPhoneNumber(); // например, "+375297777777"
+       Assert.assertTrue(phoneStr.contains("+375297777777"), "Некорректный номер: "+phoneStr);
+
+       List<String> requisites= modal.getRequisitesLabels();
+       
+       List<String> expectedReqs= Arrays.asList("Номер карты", "Срок действия", "CVV");
+       
+       for(String req: expectedReqs){
+           Assert.assertTrue(requisites.contains(req), "Отсутствует поле: "+req);
+       }
+
+       List<WebElement> icons= modal.getPaymentIcons();
+       Assert.assertTrue(icons.size()>0, "Иконки платёжных систем отсутствуют");
+   }
+}

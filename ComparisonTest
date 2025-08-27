@@ -1,0 +1,19 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class ComparisonTest {
+
+    @Test
+    public void testEqualValues() {
+        Assert.assertTrue(Comparison.getComparison(5, 5), "Должно возвращать true, если x равно y");
+        Assert.assertTrue(Comparison.getComparison(0, 0), "Должно возвращать true, если x равно y");
+        Assert.assertTrue(Comparison.getComparison(-3, -3), "Должно возвращать true, если x равно y");
+    }
+
+    @Test
+    public void testDifferentValues() {
+        Assert.assertFalse(Comparison.getComparison(5, 10), "Должно возвращать false, если x не равно y");
+        Assert.assertFalse(Comparison.getComparison(0, 1), "Должно возвращать false, если x не равно y");
+        Assert.assertFalse(Comparison.getComparison(-3, 3), "Должно возвращать false, если x не равно y");
+    }
+}

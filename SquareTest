@@ -1,0 +1,32 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class SquareTest {
+
+    @Test
+    public void testGetSquarePositive() {
+        int a = 4;
+        int h = 5;
+        double expected = 0.5 * a * h; // 10.0
+        double actual = Square.getSquare(a, h);
+        Assert.assertEquals(actual, expected, "Площадь должна быть равна 10.0");
+    }
+
+    @Test
+    public void testGetSquareZero() {
+        int a = 0;
+        int h = 10;
+        double expected = 0.0;
+        double actual = Square.getSquare(a, h);
+        Assert.assertEquals(actual, expected, "Площадь при нулевой стороне должна быть 0");
+    }
+
+    @Test
+    public void testGetSquareNegative() {
+        int a = -3;
+        int h = 6;
+        double expected = 0.5 * a * h; // -9.0
+        double actual = Square.getSquare(a, h);
+        Assert.assertEquals(actual, expected, "Площадь при отрицательной стороне");
+    }
+}

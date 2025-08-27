@@ -1,0 +1,26 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class FactorialTest {
+
+    @Test
+    public void testFactorialPositive() {
+        Assert.assertEquals(Factorial.getFactorial(0), 1, "Факториал 0 должен быть 1");
+        Assert.assertEquals(Factorial.getFactorial(1), 1, "Факториал 1 должен быть 1");
+        Assert.assertEquals(Factorial.getFactorial(5), 120, "Факториал 5 должен быть 120");
+        Assert.assertEquals(Factorial.getFactorial(7), 5040, "Факториал 7 должен быть 5040");
+    }
+
+    @Test
+    public void testFactorialNegative() {
+        int result = Factorial.getFactorial(-3);
+        // В текущей реализации результат будет 1, так как цикл не выполнится
+        Assert.assertEquals(result, 1, "Для отрицательных n результат будет 1 (по текущей реализации)");
+    }
+
+    @Test
+    public void testFactorialLargeNumber() {
+        int result = Factorial.getFactorial(10);
+        Assert.assertEquals(result, 3628800, "Факториал 10 должен быть 3628800");
+    }
+}

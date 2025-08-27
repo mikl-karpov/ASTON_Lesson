@@ -1,0 +1,43 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.List;
+
+public class MathTest {
+
+    @Test
+    public void testGetMathPositiveValues() {
+        int x = 10;
+        int y = 5;
+        List<Integer> result = Math.getMath(x, y);
+        Assert.assertEquals(result.size(), 4, "Должно быть 4 элемента");
+        Assert.assertEquals((int) result.get(0), x + y, "Сумма неверна");
+        Assert.assertEquals((int) result.get(1), x - y, "Разность неверна");
+        Assert.assertEquals((int) result.get(2), x * y, "Произведение неверно");
+        Assert.assertEquals((int) result.get(3), x / y, "Деление неверно");
+    }
+
+    @Test
+    public void testGetMathNegativeValues() {
+        int x = -8;
+        int y = 3;
+        List<Integer> result = Math.getMath(x, y);
+        Assert.assertEquals((int) result.get(0), x + y);
+        Assert.assertEquals((int) result.get(1), x - y);
+        Assert.assertEquals((int) result.get(2), x * y);
+        Assert.assertEquals((int) result.get(3), x / y);
+    }
+
+    @Test
+    public void testGetMathZeroY() {
+        int x = 10;
+        int y = 0;
+        try {
+            Math.getMath(x, y);
+            Assert.fail("Должно было возникнуть исключение деления на ноль");
+        } catch (ArithmeticException e) {
+            // Ожидаемое поведение
+            Assert.assertTrue(e.getMessage().contains("/ by zero"));
+        }
+    }
+}

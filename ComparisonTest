@@ -1,0 +1,122 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ComparisonTest {
+
+    @Test
+    void testGetComparison_EqualNumbers_ReturnsTrue() {
+        // Arrange
+        int x = 5;
+        int y = 5;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetComparison_DifferentNumbers_ReturnsFalse() {
+        // Arrange
+        int x = 5;
+        int y = 10;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertFalse(result);
+    }
+
+    @Test
+    void testGetComparison_NegativeNumbersEqual_ReturnsTrue() {
+        // Arrange
+        int x = -5;
+        int y = -5;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetComparison_NegativeAndPositive_ReturnsFalse() {
+        // Arrange
+        int x = -5;
+        int y = 5;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertFalse(result);
+    }
+
+    @Test
+    void testGetComparison_ZeroValues_ReturnsTrue() {
+        // Arrange
+        int x = 0;
+        int y = 0;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetComparison_ZeroAndNonZero_ReturnsFalse() {
+        // Arrange
+        int x = 0;
+        int y = 1;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertFalse(result);
+    }
+
+    @Test
+    void testGetComparison_MaxIntegerValues_ReturnsTrue() {
+        // Arrange
+        int x = Integer.MAX_VALUE;
+        int y = Integer.MAX_VALUE;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetComparison_MinIntegerValues_ReturnsTrue() {
+        // Arrange
+        int x = Integer.MIN_VALUE;
+        int y = Integer.MIN_VALUE;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testGetComparison_MaxAndMinInteger_ReturnsFalse() {
+        // Arrange
+        int x = Integer.MAX_VALUE;
+        int y = Integer.MIN_VALUE;
+        
+        // Act
+        boolean result = Comparison.getComparison(x, y);
+        
+        // Assert
+        assertFalse(result);
+    }
+}

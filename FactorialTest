@@ -1,0 +1,100 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class FactorialTest {
+
+    @Test
+    void testGetFactorial_Zero_ReturnsOne() {
+        // Arrange
+        int n = 0;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(1, result);
+    }
+
+    @Test
+    void testGetFactorial_One_ReturnsOne() {
+        // Arrange
+        int n = 1;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(1, result);
+    }
+
+    @Test
+    void testGetFactorial_Two_ReturnsTwo() {
+        // Arrange
+        int n = 2;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(2, result);
+    }
+
+    @Test
+    void testGetFactorial_Three_ReturnsSix() {
+        // Arrange
+        int n = 3;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(6, result);
+    }
+
+    @Test
+    void testGetFactorial_Four_ReturnsTwentyFour() {
+        // Arrange
+        int n = 4;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(24, result);
+    }
+
+    @Test
+    void testGetFactorial_Five_ReturnsOneHundredTwenty() {
+        // Arrange
+        int n = 5;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(120, result);
+    }
+
+    @Test
+    void testGetFactorial_Six_ReturnsSevenHundredTwenty() {
+        // Arrange
+        int n = 6;
+        
+        // Act
+        int result = Factorial.getFactorial(n);
+        
+        // Assert
+        assertEquals(720, result);
+    }
+
+    @Test
+    void testGetFactorial_NegativeNumber_ThrowsIllegalArgumentException() {
+        // Arrange
+        int n = -1;
+        
+        // Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            Factorial.getFactorial(n);
+        });
+    }
+}

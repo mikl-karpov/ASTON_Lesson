@@ -1,0 +1,35 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class SquareTest {
+
+    @Test
+    public void testGetSquarePositive() {
+        // Тестируем положительный случай
+        int a = 4;
+        int h = 5;
+        double expected = 0.5 * a * h; // 10.0
+        double actual = Square.getSquare(a, h);
+        assertEquals(expected, actual, "Площадь должна быть равна 10.0");
+    }
+
+    @Test
+    public void testGetSquareZero() {
+        // Тестируем случай с нулевыми значениями
+        int a = 0;
+        int h = 10;
+        double expected = 0.0;
+        double actual = Square.getSquare(a, h);
+        assertEquals(expected, actual, "Площадь при нулевой стороне должна быть 0");
+    }
+
+    @Test
+    public void testGetSquareNegative() {
+        // Тестируем отрицательные значения (может быть некорректным вводом)
+        int a = -3;
+        int h = 6;
+        double expected = 0.5 * a * h; // -9.0
+        double actual = Square.getSquare(a, h);
+        assertEquals(expected, actual, "Площадь при отрицательной стороне");
+    }
+}

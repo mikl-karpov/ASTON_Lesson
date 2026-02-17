@@ -1,0 +1,12 @@
+import java.util.List;
+
+public class Math {
+    public static List<Integer> getMath(int x, int y) {
+        int a = x + y;
+        int b = x - y;
+        int c = x * y;
+        int d = x / y;
+
+        return List.of(a, b, c, d);
+    }
+}

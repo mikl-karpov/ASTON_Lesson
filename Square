@@ -1,0 +1,8 @@
+public class Square {
+    public static int getSquare(int a, int h) {
+        int s = 0;
+        s = 0,5 * a * h
+        }
+        return s;
+    }
+}
